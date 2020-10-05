@@ -1,0 +1,20 @@
+version: '3'
+services:
+  rmq:
+    image: rabbitmq:3.8
+    hostname: rmq.example
+    container_name: rmq.example
+    ports:
+      - 5672:5672
+      - 5673:5673
+      - 15672:15672
+    volumes:
+      - ./:/workdir
+      - ./management_agent.disable_metrics_collector.conf:/etc/rabbitmq/conf.d/management_agent.disable_metrics_collector.conf
+    environment:
+      - RABBITMQ_USE_LONGNAME=true
+      - RABBITMQ_NODENAME=rabbit@rmq.example
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+      - SYS_PTRACE

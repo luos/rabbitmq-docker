@@ -1,0 +1,64 @@
+version: '3.4'
+
+x-image: &image rabbitmq:3.8.8
+
+x-common-mounts: &common-mounts
+  - "./erlang-cookie:/root/.erlang.cookie"
+  - "./erlang-cookie:/var/lib/rabbitmq/.erlang.cookie"
+  - "./enabled_plugins:/etc/rabbitmq/enabled_plugins"
+  - "./:/workdir"
+  - ./management_agent.disable_metrics_collector.conf:/etc/rabbitmq/conf.d/management_agent.disable_metrics_collector.conf
+  - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+
+# capabilities are needed for tracing or iptables, for testing
+x-caps: &caps
+  - NET_ADMIN
+  - NET_RAW
+  - SYS_PTRACE
+
+services:
+  rmq1:
+    image: *image
+    hostname: rmq1.example
+    container_name: rmq1.example
+    ports:
+      - 5672:5672
+      - 5673:5673
+      - 15672:15672
+    volumes:
+      *common-mounts
+    environment:
+      - RABBITMQ_USE_LONGNAME=true
+      - RABBITMQ_NODENAME=rabbit@rmq1.example
+    cap_add:
+      *caps
+  rmq2:
+    image: *image
+    hostname: rmq2.example
+    container_name: rmq2.example
+    ports:
+      - 5772:5672
+      - 5773:5673
+      - 15772:15672
+    volumes:
+      *common-mounts
+    environment:
+      - RABBITMQ_USE_LONGNAME=true
+      - RABBITMQ_NODENAME=rabbit@rmq2.example
+    cap_add:
+      *caps
+  rmq3:
+    image: *image
+    hostname: rmq3.example
+    container_name: rmq3.example
+    ports:
+      - 5872:5672
+      - 5873:5673
+      - 15972:15672
+    volumes:
+      *common-mounts
+    environment:
+      - RABBITMQ_USE_LONGNAME=true
+      - RABBITMQ_NODENAME=rabbit@rmq3.example
+    cap_add:
+      *caps
