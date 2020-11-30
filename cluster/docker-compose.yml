@@ -3,8 +3,8 @@ version: '3.4'
 x-image: &image rabbitmq:3.8.8
 
 x-common-mounts: &common-mounts
-  - "./erlang-cookie:/root/.erlang.cookie"
-  - "./erlang-cookie:/var/lib/rabbitmq/.erlang.cookie"
+  #- "./erlang-cookie:/root/.erlang.cookie"
+  #- "./erlang-cookie:/var/lib/rabbitmq/.erlang.cookie"
   - "./enabled_plugins:/etc/rabbitmq/enabled_plugins"
   - "./:/workdir"
   - ./management_agent.disable_metrics_collector.conf:/etc/rabbitmq/conf.d/management_agent.disable_metrics_collector.conf
@@ -28,6 +28,7 @@ services:
     volumes:
       *common-mounts
     environment:
+      - 'RABBITMQ_ERLANG_COOKIE=rabbit'
       - RABBITMQ_USE_LONGNAME=true
       - RABBITMQ_NODENAME=rabbit@rmq1.example
     cap_add:
@@ -45,6 +46,7 @@ services:
     environment:
       - RABBITMQ_USE_LONGNAME=true
       - RABBITMQ_NODENAME=rabbit@rmq2.example
+      - 'RABBITMQ_ERLANG_COOKIE=rabbit'
     cap_add:
       *caps
   rmq3:
@@ -60,5 +62,6 @@ services:
     environment:
       - RABBITMQ_USE_LONGNAME=true
       - RABBITMQ_NODENAME=rabbit@rmq3.example
+      - 'RABBITMQ_ERLANG_COOKIE=rabbit'
     cap_add:
       *caps
