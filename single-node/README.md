@@ -1,4 +1,4 @@
-# Single Node Exercise
+# Single Node Exercise
 Prerequisites:
 
 * Git
