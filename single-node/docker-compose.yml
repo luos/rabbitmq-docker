@@ -1,7 +1,7 @@
 version: '3'
 services:
   rmq:
-    image: rabbitmq:3.8
+    image: rabbitmq:3.8-management
     hostname: rmq.example
     container_name: rmq.example
     ports:
