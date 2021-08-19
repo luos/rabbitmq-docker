@@ -3,7 +3,7 @@ Prerequisites:
 
 * Git
 * Docker
-* Docker-compose
+* Docker-compose (part of docker in newer versions)
 
 # Cloning the repository
 
