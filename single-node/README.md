@@ -18,7 +18,7 @@ cd single-node
 docker-compose up
 ```
 
-# Obtaining a shell in the container
+# Obtaining a shell in the container
 
 Open a new tab or terminal and start a shell in the container:
 
