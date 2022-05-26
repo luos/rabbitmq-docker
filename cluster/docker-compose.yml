@@ -1,6 +1,6 @@
 version: '3.4'
 
-x-image: &image rabbitmq:3.8.8
+x-image: &image rabbitmq:3.10.1
 
 x-common-mounts: &common-mounts
   #- "./erlang-cookie:/root/.erlang.cookie"
